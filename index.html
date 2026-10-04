@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Collection de cartes</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <h1>Collection de cartes</h1>
+
+    <form id="search-form" class="search-form">
+      <input id="search-input" type="search" placeholder="Pseudo Twitch" autocomplete="off" required>
+      <button type="submit" aria-label="Rechercher">🔍</button>
+    </form>
+    <p id="search-message" class="search-message"></p>
+
+    <div id="collections"></div>
+  </main>
+
+  <div id="lightbox" class="lightbox">
+    <div id="flip-card" class="flip-card">
+      <img id="lightbox-front" class="face">
+      <img id="lightbox-back" class="face back" alt="Dos de la carte">
+    </div>
+    <p class="lightbox-hint">Clique sur la carte pour voir le dos</p>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
