@@ -5,8 +5,10 @@
 body {
   margin: 0;
   font-family: sans-serif;
-  background: #111;
+  background: #a80000;
+  background: linear-gradient(0deg,rgb(0, 0, 0) 0%, rgb(112, 0, 88) 80%);
   color: #fff;
+  height: 100vh;
 }
 
 main {
@@ -18,18 +20,24 @@ main {
 
 .search-form {
   display: flex;
-  justify-content:
-  center; gap: 8px;
+  justify-content: center;
+  gap: 8px;
 }
 
 .search-form input {
   padding: 8px 12px;
+  width: 300px;
   font-size: 16px;
+  border-radius: 12px;
+  border: none;
 }
 
 .search-form button {
-  padding: 8px 12px;
+  padding: 0px 0px;
   cursor: pointer;
+  font-size: 20px;
+  background: transparent;
+  border: none;
 }
 
 .search-message {
