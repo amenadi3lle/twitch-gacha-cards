@@ -15,11 +15,12 @@ const elements = {
 init();
 
 async function init() {
-  const [collections, cards] = await Promise.all([
+  const [collections, cards, rarities] = await Promise.all([
     fetchDocuments(db.collection("collections")),
     fetchDocuments(db.collection("cards")),
+    fetchDocuments(db.collection("rarities")),
   ]);
-  renderCollections(collections, cards);
+  renderCollections(collections, cards, rarities);
   elements.form.addEventListener("submit", handleSearch);
   setupLightbox();
 }
@@ -29,15 +30,15 @@ async function fetchDocuments(query) {
   return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
 }
 
-function renderCollections(collections, cards) {
+function renderCollections(collections, cards, rarities) {
   elements.collections.replaceChildren(
     ...collections.map((collection) =>
-      createCollectionSection(collection, cards.filter((card) => card.collectionId === collection.id))
+      createCollectionSection(collection, cards.filter((card) => card.collectionId === collection.id), rarities)
     )
   );
 }
 
-function createCollectionSection(collection, cards) {
+function createCollectionSection(collection, cards, rarities) {
   const section = document.createElement("section");
   section.className = "collection";
 
@@ -46,16 +47,21 @@ function createCollectionSection(collection, cards) {
 
   const grid = document.createElement("div");
   grid.className = "cards";
-  grid.append(...cards.map(createCardElement));
+  grid.append(...cards.map((card) => createCardElement(card, rarities)));
 
   section.append(title, grid);
   return section;
 }
 
-function createCardElement(card) {
+function createCardElement(card, rarities) {
   const element = document.createElement("div");
   element.className = "card";
   element.dataset.cardId = card.id;
+
+  const rarity = rarities.find((rarity) => rarity.id === card.rarityId);
+  if (rarity) {
+    element.style.setProperty("--rarity-color", rarity.color);
+  }
 
   const image = document.createElement("img");
   image.src = `cards/${card.collectionId}_${card.id}.png`;
@@ -71,6 +77,8 @@ async function handleSearch(event) {
   event.preventDefault();
   const username = elements.input.value.trim().toLowerCase();
   if (!username) {
+    elements.message.textContent = "";
+    clearOwnership();
     return;
   }
 

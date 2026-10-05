@@ -4,14 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Album des cartes de la chaine d'Amenadielle</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Architects+Daughter&display=swap" rel="stylesheet" id="font-link">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <main>
-    <h1>Collections des cartes de la chaine d'Amenadielle</h1>
+    <div class="header">
+      <h1>Les collections d'Amenadielle</h1>
+    </div>
+
+    <p class="description">Bienvenue dans l'album des cartes de la chaine d'Amenadielle !<br>Ici vous retrouvez l'entièreté des collections et des cartes disponibles et que vous pouvez obtenir pendant les lives Twitch de votre streameuse préférée.<br> Vous pouvez également voir qui a quelles cartes et complété quelles collections simplement en recherchant son pseudo twitch dans la batte de recherche ci-dessous.<br><br>💜 Bonne visite hihi ! 💜</p>
 
     <form id="search-form" class="search-form">
-      <input id="search-input" type="search" placeholder="Pseudo Twitch" autocomplete="off" required>
+      <input id="search-input" type="search" placeholder="Rechercher un viewer..." autocomplete="off">
       <button type="submit" aria-label="Rechercher">🔍</button>
     </form>
     <p id="search-message" class="search-message"></p>
