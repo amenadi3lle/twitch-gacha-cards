@@ -64,7 +64,7 @@ function createCardElement(card, rarities) {
   }
 
   const image = document.createElement("img");
-  image.src = `cards/${card.collectionId}_${card.id}.png`;
+  image.src = `cards/${card.id}.png`;
   image.alt = card.name;
   image.loading = "lazy";
 
