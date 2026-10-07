@@ -139,7 +139,7 @@ function setupLightbox() {
 }
 
 function openLightbox(card) {
-  elements.lightboxFront.src = `cards/${card.collectionId}_${card.id}.png`;
+  elements.lightboxFront.src = `cards/${card.id}.png`;
   elements.lightboxFront.alt = card.name;
   elements.lightboxBack.src = `backs/${card.collectionId}.png`;
   elements.flipCard.classList.remove("flipped");
