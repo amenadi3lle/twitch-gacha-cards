@@ -10,6 +10,7 @@ const elements = {
   flipCard: document.getElementById("flip-card"),
   lightboxFront: document.getElementById("lightbox-front"),
   lightboxBack: document.getElementById("lightbox-back"),
+  tempUsername: null,
 };
 
 init();
@@ -22,6 +23,11 @@ async function init() {
   ]);
   renderCollections(collections, cards, rarities);
   elements.form.addEventListener("submit", handleSearch);
+  elements.input.addEventListener("input", () => {
+    if (elements.input.value === "") {
+      handleSearch();
+    }
+  });
   setupLightbox();
 }
 
@@ -74,14 +80,22 @@ function createCardElement(card, rarities) {
 }
 
 async function handleSearch(event) {
-  event.preventDefault();
+  event?.preventDefault();
   const username = elements.input.value.trim().toLowerCase();
   if (!username) {
+
+    if (!elements.tempUsername) {
+      return;
+    }
+
+    console.log("clearing...");
     elements.message.textContent = "";
+    elements.tempUsername = null;
     clearOwnership();
     return;
   }
 
+  elements.tempUsername = username;
   const doc = await db.collection("viewers").doc(username).get();
   if (!doc.exists) {
     elements.message.textContent = "Viewer non trouvé";
